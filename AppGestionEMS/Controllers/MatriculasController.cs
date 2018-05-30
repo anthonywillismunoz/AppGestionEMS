@@ -7,37 +7,40 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AppGestionEMS.Models;
+using Microsoft.AspNet.Identity;
 
 namespace AppGestionEMS.Controllers
 {
     [Authorize(Roles = "admin")]
-    public class AsignacionDocentesController : Controller
+    public class MatriculasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: AsignacionDocentes
+        // GET: Matriculas
         public ActionResult Index()
         {
-            var asignacionDocentes = db.AsignacionDocentes.Include(a => a.Curso).Include(a => a.GrupoClase).Include(a => a.User);
-            return View(asignacionDocentes.ToList());
+            int grupo = getGrupoClase();
+            var matriculas = db.Matriculas.Include(m => m.Curso).Include(m => m.GrupoClase).Include(m => m.User).Where(p => p.GrupoClaseId ==
+           grupo).ToList();
+            return View(matriculas.ToList());
         }
 
-        // GET: AsignacionDocentes/Details/5
+        // GET: Matriculas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AsignacionDocentes asignacionDocentes = db.AsignacionDocentes.Find(id);
-            if (asignacionDocentes == null)
+            Matriculas matriculas = db.Matriculas.Find(id);
+            if (matriculas == null)
             {
                 return HttpNotFound();
             }
-            return View(asignacionDocentes);
+            return View(matriculas);
         }
 
-        // GET: AsignacionDocentes/Create
+        // GET: Matriculas/Create
         public ActionResult Create()
         {
             ViewBag.CursoId = new SelectList(db.Cursos, "Id", "descripcion");
@@ -46,85 +49,85 @@ namespace AppGestionEMS.Controllers
             return View();
         }
 
-        // POST: AsignacionDocentes/Create
+        // POST: Matriculas/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CursoId,GrupoClaseId,UserId")] AsignacionDocentes asignacionDocentes)
+        public ActionResult Create([Bind(Include = "Id,CursoId,GrupoClaseId,UserId")] Matriculas matriculas)
         {
             if (ModelState.IsValid)
             {
-                db.AsignacionDocentes.Add(asignacionDocentes);
+                db.Matriculas.Add(matriculas);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CursoId = new SelectList(db.Cursos, "Id", "descripcion", asignacionDocentes.CursoId);
-            ViewBag.GrupoClaseId = new SelectList(db.GrupoClases, "Id", "descripcion", asignacionDocentes.GrupoClaseId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", asignacionDocentes.UserId);
-            return View(asignacionDocentes);
+            ViewBag.CursoId = new SelectList(db.Cursos, "Id", "descripcion", matriculas.CursoId);
+            ViewBag.GrupoClaseId = new SelectList(db.GrupoClases, "Id", "descripcion", matriculas.GrupoClaseId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", matriculas.UserId);
+            return View(matriculas);
         }
 
-        // GET: AsignacionDocentes/Edit/5
+        // GET: Matriculas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AsignacionDocentes asignacionDocentes = db.AsignacionDocentes.Find(id);
-            if (asignacionDocentes == null)
+            Matriculas matriculas = db.Matriculas.Find(id);
+            if (matriculas == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CursoId = new SelectList(db.Cursos, "Id", "descripcion", asignacionDocentes.CursoId);
-            ViewBag.GrupoClaseId = new SelectList(db.GrupoClases, "Id", "descripcion", asignacionDocentes.GrupoClaseId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", asignacionDocentes.UserId);
-            return View(asignacionDocentes);
+            ViewBag.CursoId = new SelectList(db.Cursos, "Id", "descripcion", matriculas.CursoId);
+            ViewBag.GrupoClaseId = new SelectList(db.GrupoClases, "Id", "descripcion", matriculas.GrupoClaseId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", matriculas.UserId);
+            return View(matriculas);
         }
 
-        // POST: AsignacionDocentes/Edit/5
+        // POST: Matriculas/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CursoId,GrupoClaseId,UserId")] AsignacionDocentes asignacionDocentes)
+        public ActionResult Edit([Bind(Include = "Id,CursoId,GrupoClaseId,UserId")] Matriculas matriculas)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(asignacionDocentes).State = EntityState.Modified;
+                db.Entry(matriculas).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CursoId = new SelectList(db.Cursos, "Id", "descripcion", asignacionDocentes.CursoId);
-            ViewBag.GrupoClaseId = new SelectList(db.GrupoClases, "Id", "descripcion", asignacionDocentes.GrupoClaseId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", asignacionDocentes.UserId);
-            return View(asignacionDocentes);
+            ViewBag.CursoId = new SelectList(db.Cursos, "Id", "descripcion", matriculas.CursoId);
+            ViewBag.GrupoClaseId = new SelectList(db.GrupoClases, "Id", "descripcion", matriculas.GrupoClaseId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", matriculas.UserId);
+            return View(matriculas);
         }
 
-        // GET: AsignacionDocentes/Delete/5
+        // GET: Matriculas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AsignacionDocentes asignacionDocentes = db.AsignacionDocentes.Find(id);
-            if (asignacionDocentes == null)
+            Matriculas matriculas = db.Matriculas.Find(id);
+            if (matriculas == null)
             {
                 return HttpNotFound();
             }
-            return View(asignacionDocentes);
+            return View(matriculas);
         }
 
-        // POST: AsignacionDocentes/Delete/5
+        // POST: Matriculas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AsignacionDocentes asignacionDocentes = db.AsignacionDocentes.Find(id);
-            db.AsignacionDocentes.Remove(asignacionDocentes);
+            Matriculas matriculas = db.Matriculas.Find(id);
+            db.Matriculas.Remove(matriculas);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -136,6 +139,15 @@ namespace AppGestionEMS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private int getGrupoClase()
+        {
+            string currentUserId = User.Identity.GetUserId();
+            var grupos = db.AsignacionDocentes.Where(p => p.UserId == currentUserId).ToList();
+            if (grupos.Count == 0)
+                return -1;
+            else return grupos.First().GrupoClase.Id;
         }
     }
 }

@@ -198,9 +198,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AsignacionDocentesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
+    <Compile Include="Controllers\EvaluacionesController.cs" />
     <Compile Include="Controllers\GrupoClasesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MatriculasController.cs" />
+    <Compile Include="Controllers\MisEvaluacionesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,13 +219,22 @@
     <Compile Include="Migrations\201805302007582_CreateGrupoClases.Designer.cs">
       <DependentUpon>201805302007582_CreateGrupoClases.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805302020495_CreateAsignacionDocente.cs" />
-    <Compile Include="Migrations\201805302020495_CreateAsignacionDocente.Designer.cs">
-      <DependentUpon>201805302020495_CreateAsignacionDocente.cs</DependentUpon>
+    <Compile Include="Migrations\201805302050160_CreateMatriculas.cs" />
+    <Compile Include="Migrations\201805302050160_CreateMatriculas.Designer.cs">
+      <DependentUpon>201805302050160_CreateMatriculas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805302126225_CreateAsignacionDocente.cs" />
+    <Compile Include="Migrations\201805302126225_CreateAsignacionDocente.Designer.cs">
+      <DependentUpon>201805302126225_CreateAsignacionDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805302211005_CreateEvaluaciones.cs" />
+    <Compile Include="Migrations\201805302211005_CreateEvaluaciones.Designer.cs">
+      <DependentUpon>201805302211005_CreateEvaluaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AsignacionDocentes.cs" />
+    <Compile Include="Models\Evaluaciones.cs" />
     <Compile Include="Models\Matriculas.cs" />
     <Compile Include="Models\GrupoClase.cs" />
     <Compile Include="Models\Cursos.cs" />
@@ -255,6 +267,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="images\clase.jpg" />
+    <Content Include="images\evaluaciones.jpg" />
+    <Content Include="images\profesor.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -304,6 +319,21 @@
     <Content Include="Views\AsignacionDocentes\Details.cshtml" />
     <Content Include="Views\AsignacionDocentes\Edit.cshtml" />
     <Content Include="Views\AsignacionDocentes\Index.cshtml" />
+    <Content Include="Views\Matriculas\Create.cshtml" />
+    <Content Include="Views\Matriculas\Delete.cshtml" />
+    <Content Include="Views\Matriculas\Details.cshtml" />
+    <Content Include="Views\Matriculas\Edit.cshtml" />
+    <Content Include="Views\Matriculas\Index.cshtml" />
+    <Content Include="Views\Evaluaciones\Create.cshtml" />
+    <Content Include="Views\Evaluaciones\Delete.cshtml" />
+    <Content Include="Views\Evaluaciones\Details.cshtml" />
+    <Content Include="Views\Evaluaciones\Edit.cshtml" />
+    <Content Include="Views\Evaluaciones\Index.cshtml" />
+    <Content Include="Views\MisEvaluaciones\Create.cshtml" />
+    <Content Include="Views\MisEvaluaciones\Delete.cshtml" />
+    <Content Include="Views\MisEvaluaciones\Details.cshtml" />
+    <Content Include="Views\MisEvaluaciones\Edit.cshtml" />
+    <Content Include="Views\MisEvaluaciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -326,8 +356,14 @@
     <EmbeddedResource Include="Migrations\201805302007582_CreateGrupoClases.resx">
       <DependentUpon>201805302007582_CreateGrupoClases.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805302020495_CreateAsignacionDocente.resx">
-      <DependentUpon>201805302020495_CreateAsignacionDocente.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805302050160_CreateMatriculas.resx">
+      <DependentUpon>201805302050160_CreateMatriculas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805302126225_CreateAsignacionDocente.resx">
+      <DependentUpon>201805302126225_CreateAsignacionDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805302211005_CreateEvaluaciones.resx">
+      <DependentUpon>201805302211005_CreateEvaluaciones.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,5 +15,9 @@ namespace AppGestionEMS.Models
         [Display(Name="GrupoClase")]
         public int GrupoClaseId { get; set; }
         public virtual GrupoClase GrupoClase { get; set; }
+
+        [Display(Name = "Profesor")]
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

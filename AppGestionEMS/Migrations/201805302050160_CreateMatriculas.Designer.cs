@@ -7,13 +7,13 @@ namespace AppGestionEMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreateAsignacionDocente : IMigrationMetadata
+    public sealed partial class CreateMatriculas : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateAsignacionDocente));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateMatriculas));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805302020495_CreateAsignacionDocente"; }
+            get { return "201805302050160_CreateMatriculas"; }
         }
         
         string IMigrationMetadata.Source
